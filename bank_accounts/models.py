@@ -30,8 +30,9 @@ class BankCard(models.Model):
     )
 
     bank_account = models.ForeignKey(
-        BankAccount, on_delete=models.CASCADE, related_name="account"
+        BankAccount, on_delete=models.CASCADE, related_name="cards"
     )
+    balance = models.PositiveIntegerField(default=0)
     card_number = models.IntegerField(validators=[CardNumberValidator()])
     expiration_date = models.CharField(max_length=7, validators=[DateValidator()])
     ccv_code = models.IntegerField(validators=[MaxValueValidator(999)])

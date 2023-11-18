@@ -4,6 +4,6 @@ from django.urls import path
 urlpatterns = [
     path(
         "test/",
-        views.BankAccountInformation.as_view(),
+        views.BankAccountPrivateInformation.as_view(),
     )
 ]
