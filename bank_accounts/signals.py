@@ -1,5 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from .logic import create_correct_number
 from users.models import User
 from .models import BankAccount, BankCard
 import uuid
@@ -24,11 +25,7 @@ def create_bank_account_and_card(instance, created, **kwargs):
 
         # create bank card
 
-        while True:
-            card_number = "".join((str(randrange(10)) for _ in range(16)))
-
-            if not BankCard.objects.filter(card_number=card_number).exists():
-                break
+        card_number = create_correct_number()
 
         expiration = datetime.now() + timedelta(days=1800)
         valid_date = f"{expiration.month}/{expiration.year}"

@@ -5,7 +5,7 @@ from django.utils.deconstruct import deconstructible
 @deconstructible
 class CardNumberValidator(RegexValidator):
     message = "the card number must be have a 16 digit's"
-    regex = "^\d{16}$"
+    regex = "^[\d{4}-/d{4}-/d{4}-/d{4}$]"
 
 
 @deconstructible
