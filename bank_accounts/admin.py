@@ -19,5 +19,5 @@ class BankAccountAdmin(admin.ModelAdmin):
 @admin.register(BankCard)
 class BankCardAdmin(admin.ModelAdmin):
     list_display = ["card_number"]
-    fields = ["card_number"]
-    readonly_fields = ["card_number"]
+    fields = ["bank_account", "balance", "card_number", "ccv_code"]
+    readonly_fields = fields

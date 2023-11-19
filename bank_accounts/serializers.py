@@ -7,7 +7,7 @@ class BankCardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BankCard
-        fields = ["card_number", "card_type", "available"]
+        fields = ["card_number", "balance", "card_type", "available"]
 
     def get_card_number(self, obj):
         hashed_card = "*" * 12 + str(obj.card_number)[12:]

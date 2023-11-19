@@ -12,4 +12,6 @@ urlpatterns = [
     # users app
     path("users/", include("users.urls")),
     path("bank/", include("bank_accounts.urls")),
+    # operations
+    path("terminal/", include("cash_operation.urls")),
 ]

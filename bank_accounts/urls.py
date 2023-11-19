@@ -3,7 +3,7 @@ from django.urls import path
 
 urlpatterns = [
     path(
-        "test/",
+        "myself/",
         views.BankAccountPrivateInformation.as_view(),
     )
 ]

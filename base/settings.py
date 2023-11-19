@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "bank_accounts",
     "users",
+    "cash_operation",
 ]
 
 MIDDLEWARE = [
