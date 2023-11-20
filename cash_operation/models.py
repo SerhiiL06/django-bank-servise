@@ -1,6 +1,7 @@
 from django.db import models
+
 from django.core.validators import MaxValueValidator
-from bank_accounts.models import BankCard, BankAccount
+from bank_accounts.models import BankCard
 
 
 class Transaction(models.Model):
@@ -25,12 +26,19 @@ class TerminalOperation(Transaction):
 
     type_of = models.CharField(choices=operatation_type, max_length=10)
 
+    def __str__(self):
+        type_of = "Refill" if self.type_of == "re" else "Withdrawal"
+        return f"{self.card.bank_account.owner} amount {self.amount} | {type_of}"
+
 
 class ElectronicOperation(Transaction):
     card = models.ForeignKey(
-        BankCard, on_delete=models.PROTECT, related_name="send_oretations"
+        BankCard, on_delete=models.PROTECT, related_name="send_operations"
     )
     recipient_card = models.ForeignKey(
         BankCard, on_delete=models.PROTECT, related_name="recepient_operation"
     )
     message = models.CharField(max_length=150, blank=True, null=True)
+
+    def __str__(self):
+        return f"Sender {self.card.bank_account.owner} amount {self.amount}"

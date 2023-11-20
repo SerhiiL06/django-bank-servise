@@ -1,5 +1,4 @@
 from .models import TerminalOperation, ElectronicOperation
-from bank_accounts.models import BankCard
 from rest_framework import serializers
 
 
@@ -19,3 +18,27 @@ class ElectronicOperationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ElectronicOperation
         fields = ["card", "amount", "recipient_card", "message"]
+
+
+class TransactionSerializer(serializers.Serializer):
+    date_operation = serializers.SerializerMethodField()
+    amount = serializers.FloatField(required=False)
+
+    def get_date_operation(self, obj):
+        return obj.date_operation.date()
+
+    class Meta:
+        abstract = True
+        fields = ["id", "date_operation", "amount"]
+
+
+class AllOperationsSerializer(TransactionSerializer):
+    terminal_id = serializers.IntegerField(required=False)
+    card = serializers.CharField()
+    method_operation = serializers.SerializerMethodField()
+
+    def get_method_operation(self, obj):
+        if obj.type_of in ["re", "with"]:
+            return "Terminal"
+
+        return "Electronic"
