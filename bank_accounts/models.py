@@ -40,4 +40,4 @@ class BankCard(models.Model):
     available = models.BooleanField(default=True)
 
     def __str__(self) -> str:
-        return "Account"
+        return self.bank_account.owner.full_name()

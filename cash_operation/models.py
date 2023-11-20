@@ -30,7 +30,7 @@ class ElectronicOperation(Transaction):
     card = models.ForeignKey(
         BankCard, on_delete=models.PROTECT, related_name="send_oretations"
     )
-    recipient_card = models.OneToOneField(
+    recipient_card = models.ForeignKey(
         BankCard, on_delete=models.PROTECT, related_name="recepient_operation"
     )
     message = models.CharField(max_length=150, blank=True, null=True)
